@@ -1,16 +1,24 @@
 import { APIClanWar } from "../types"
 import { Teams } from "./Teams"
-import * as moment from 'moment'
+import { Time } from "./Time"
 
 export class ClanWar {
+    /* The number of members in the war for both clans */
     membersCount: number
+    /* The state of the war */
     state: string
+    /* The information about each clan in the war */
     teams: Teams[]
+    /* The duration of the war day */
     warDuration: string
+    /* The duration of the war preparation */
     preparationDuration: string
+    /* The number of attacks each player have */
     attacksPerPlayer: number
-    warStartTime: string
-    warEndTime: string
+    /* The date when the war will start */
+    warStartTime: Time | null
+    /* The date when the war will end */
+    warEndTime: Time | null 
 
     constructor(data: APIClanWar) {
         this.membersCount = data.membersCount
@@ -18,18 +26,8 @@ export class ClanWar {
         this.warDuration = data.warDuration
         this.preparationDuration = data.preparationDuration
         this.attacksPerPlayer = data.attacksPerPlayer
-        this.warStartTime = data.warStartTime
-        this.warEndTime = data.warEndTime
+        this.warStartTime = data.warStartTime ? new Time (data.warStartTime) : null
+        this.warEndTime = data.warEndTime ? new Time(data.warEndTime) : null
         this.teams = data.teams.map((data) => new Teams(data))
-    }
-
-    formatStartTime(input?: string) {
-        if (!input) input = 'DD/MM/YYYY h:mm:ss'
-        return moment.default(this.warStartTime).format(input)
-    }
-
-    formatEndTime(input?: string) {
-        if (!input) input = 'DD/MM/YYYY h:mm:ss'
-        return moment.default(this.warEndTime).format(input)
     }
 }

@@ -4,8 +4,11 @@ import { Members } from "./Members"
 import { Client } from '../client/Client'
 
 export class Clan {
+    /* The tag of the clan */
     tag: string
+    /* The info of the clan */
     info: Info | null
+    /* An array of the members of the clan */
     members: Members[]
 
     constructor(public client: Client, data: APIClan) {
@@ -14,7 +17,8 @@ export class Clan {
         this.members = data.members.map((data) => new Members(data))
     }
 
+    /* Fetch the current war information of that clan */
     async war() {
-        return this.client.getClanWar(this.tag)
+        return await this.client.getClanWar(this.tag)
     }
 }

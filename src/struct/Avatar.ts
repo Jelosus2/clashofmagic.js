@@ -5,18 +5,31 @@ import { PlayerStatistic } from './PlayerStatistic'
 import { Commodity } from './Commodity'
 
 export class Avatar {
+    /* The name of the player */
     name: string
+    /* The level of the player */
     level: number
+    /* The xp of the player */
     xp: number
+    /* The league of the player */
     league: string
+    /* The icon URL of the league of the player */
     leagueIcon: string
+    /* The levels of the Townhall and Builder hall */
     townHallLevels: THLevels | null
+    /* The player statistics about attacks and defenses */
     statistics: PlayerStatistic | null
+    /* The trophies of the player in the main village */
     mainTrophies: number
+    /* The trophies of the player in the builder village */
     builderTrophies: number
+    /* The legendary trophies of the player in the main village */
     legendaryTrophies: number
+    /* The legendary trophies of the player in the builder village */
     legendaryTrophiesBuilder: number
+    /* The legendary statistics about the player */
     legendLeague: LegendLeague | null
+    /* Other information of the player such as best trophies and war stars */
     commodity: Commodity | null
 
     constructor(data: PlayerAvatar) {

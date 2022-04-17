@@ -1,3 +1,5 @@
+/* The types for the data structure */
+
 export interface APIPlayer {
     tag: string
     clanTag: string
@@ -7,7 +9,11 @@ export interface APIPlayer {
 }
 
 export interface PlayerAnalytics {
-    createTime: string
+    createTime: PlayerCreateTime
+}
+
+export interface PlayerCreateTime {
+    time: string
 }
 
 export interface PlayerAvatar {
@@ -119,8 +125,12 @@ export interface APIClanWar {
     warDuration: string
     preparationDuration: string
     attacksPerPlayer: number
-    warStartTime: string
-    warEndTime: string
+    warStartTime: WarTime
+    warEndTime: WarTime
+}
+
+export interface WarTime {
+    time: string
 }
 
 export interface WarTeams {
