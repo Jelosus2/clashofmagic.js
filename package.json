@@ -21,7 +21,7 @@
     "Wrapper"
   ],
   "author": "Jelosus1",
-  "license": "MIT",
+  "license": "ISC",
   "engines": {
     "node": ">=14.x"
   },

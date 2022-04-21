@@ -19,4 +19,18 @@ export class RequestHandler {
 
         return data
     }
+
+    async post(path: string, body: object) {
+        const res = await fetch(`https://api.clashofmagic.cc/magic-${this.server}/${path}`, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                "accept": "application/json", "Content-Type": "application/json"
+            }
+        }).catch(() => null)
+
+        const data = await res?.json().catch(() => null)
+
+        return data
+    }
 }

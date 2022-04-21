@@ -121,7 +121,8 @@ export interface APIToken {
 export interface APIClanWar {
     membersCount: number
     state: string
-    teams: WarTeams[]
+    current: WarTeams
+    opponent: WarTeams
     warDuration: string
     preparationDuration: string
     attacksPerPlayer: number

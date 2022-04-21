@@ -7,8 +7,10 @@ export class ClanWar {
     membersCount: number
     /* The state of the war */
     state: string
-    /* The information about each clan in the war */
-    teams: Teams[]
+    /* The information about the clan in the war */
+    current: Teams | null
+    /* The information about the clan in the war */
+    opponent: Teams | null
     /* The duration of the war day */
     warDuration: string
     /* The duration of the war preparation */
@@ -23,11 +25,12 @@ export class ClanWar {
     constructor(data: APIClanWar) {
         this.membersCount = data.membersCount
         this.state = data.state
+        this.current = data.current ? new Teams(data.current) : null
+        this.opponent = data.opponent ? new Teams(data.opponent) : null
         this.warDuration = data.warDuration
         this.preparationDuration = data.preparationDuration
         this.attacksPerPlayer = data.attacksPerPlayer
         this.warStartTime = data.warStartTime ? new Time (data.warStartTime) : null
         this.warEndTime = data.warEndTime ? new Time(data.warEndTime) : null
-        this.teams = data.teams.map((data) => new Teams(data))
     }
 }

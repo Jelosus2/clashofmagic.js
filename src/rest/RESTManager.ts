@@ -32,7 +32,11 @@ export class RESTManager {
         if (!APIToken) throw new ClientError('You must input the API Token!')
         tag = tag.replace('#', '%23')
 
-        return this.handler.request(`users/${tag}/${APIToken}`)
+        const body = {
+            token: APIToken
+        }
+
+        return this.handler.post(`users/${tag}/verify`, body)
     }
 
     /* Request the clan war information and check the parse and API errors */

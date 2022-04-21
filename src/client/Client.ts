@@ -1,4 +1,4 @@
-import { EventEmitter } from 'events'
+import { EventEmitter } from 'node:events'
 import { RESTManager } from '../rest/RESTManager'
 import { ClientError } from '../rest/ClientError'
 
