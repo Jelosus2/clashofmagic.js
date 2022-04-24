@@ -1,12 +1,16 @@
 import { EventEmitter } from 'node:events'
 import { RESTManager } from '../rest/RESTManager'
 import { ClientError } from '../rest/ClientError'
+import { EventManager } from './EventManager'
 
 import {
     Player,
     Clan,
     Token,
-    ClanWar
+    ClanWar,
+    ClanMember,
+    PlayerName,
+    PlayerLeague
 }
 from '../struct'
 
@@ -27,6 +31,8 @@ export class Client extends EventEmitter {
     rest: RESTManager
     /* The type of server to get the information */
     server: string
+    /* The Event Manager for the client */
+    events: EventManager
 
     constructor (server: Server) {
         super()
@@ -36,6 +42,7 @@ export class Client extends EventEmitter {
 
         this.rest = new RESTManager(server)
         this.server = server
+        this.events = new EventManager(this)
     }
 
     /* Get the information about a player, adapt it to a structure and return it */
@@ -69,4 +76,19 @@ export class Client extends EventEmitter {
 
         return new ClanWar(data)
     }
+
+    //@ts-ignore
+    on<K extends keyof Events>(eventName: K, listener: (...args: Events[K]) => void): this
+    // @ts-ignore
+    once<K extends keyof Events>(eventName: K, listener: (...args: Events[K]) => void): this 
+    // @ts-ignore
+    emit<K extends keyof Events>(eventName: K, ...args: Events[K]): boolean 
+}
+
+/* The events of the client */
+interface Events {
+    ['clanMemberAdd']: [newMember: ClanMember],
+    ['clanMemberRemove']: [oldMember: ClanMember],
+    ['playerNameUpdate']: [oldName: PlayerName, newName: PlayerName],
+    ['playerLeagueUpdate']: [newLeague: PlayerLeague]
 }

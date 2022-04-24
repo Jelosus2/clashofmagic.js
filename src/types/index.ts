@@ -162,3 +162,15 @@ export interface WarState {
     percentage: number
 }
 
+export interface ClanMembersEvent {
+    tag: string 
+}
+
+export interface PlayerNameEvent {
+    name: string
+}
+
+export interface PlayerLeagueEvent {
+    league: string
+    leagueIcon: string
+}

@@ -3,6 +3,15 @@ clashofmagic.js it's a wrapper for the Clash of Magic API made in TypeScript and
 
 **Note: It's required v14 of node or a newer version**
 
+# Changelog
+```diff
+v1.0.0
+= Added the package
+
+v1.1.0
++ Added client events
+```
+
 # Setup
 ```js
 const { Client } = require('clashofmagic.js')
@@ -75,6 +84,25 @@ verifyToken('#2PP', 'API-TOKEN-HERE')
 { status: "valid" }
 */
 ```
+
+# Client Events
+```js
+client.events.addPlayer('#2PP')
+
+client.on('playerNameUpdate', (oldName, newName) => {
+	console.log(oldName.name + ' - ' + newName.name)
+})
+
+client.events.init()
+
+// This will return the old and new name of the player when he change it
+```
+
+### Available Events:
+- name: **clanMemberAdd**, listener: **newMember**
+- name: **clanMemberRemove**, listener: **oldMember**
+- name: **playerNameUpdate**, listeners: **oldName, newName**
+- name: **playerLeagueUpdate**, listener: **newLeague**
 
 # Disclaimer
 > This content is not affiliated with, endorsed, sponsored, or specifically approved by Supercell and Supercell is not responsible for it. For more information see [Supercell's Fan Content Policy](https://supercell.com/en/fan-content-policy/).
