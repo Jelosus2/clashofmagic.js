@@ -1,6 +1,6 @@
 import { Client } from './Client'
 import { ClientError } from '../rest/ClientError'
-import { ClanMember, PlayerName, PlayerLeague } from '../struct'
+import { ClanMember, PlayerName, PlayerLeague, ClanWar } from '../struct'
 
 /* The Event Manager for the client */
 export class EventManager {
@@ -17,6 +17,9 @@ export class EventManager {
     private readonly oldName: any[] = []
     /* Here is stored the old league of the player */
     private readonly oldLeague: any[] = []
+
+    /* The date when a war start */
+    private readonly warStartDate: any[] = []
 
     constructor(private readonly client: Client) {
 
@@ -44,6 +47,7 @@ export class EventManager {
         this.clanMemberRemove()
         this.playerNameUpdate()
         this.playerLeagueUpdate()
+        this.clanWarStart()
     }
 
     /* The 'clanMemberRemove' event */
@@ -173,6 +177,30 @@ export class EventManager {
                 }
 
                 this.oldLeague.push(info?.league)
+            }
+        }, 1000 * 60 * 8)
+    }
+
+    private async clanWarStart() {
+        let i = 0
+
+        setInterval(async () => {
+            const war: any = await this.client.getClanWar(this.clanTag[0])
+            let date = war.warStartTime
+
+            if (this.warStartDate.length == 0) this.warStartDate.push(date)
+
+            if (this.warStartDate[0] != date) {
+                const warStart = new ClanWar(war)
+
+                this.client.emit('clanWarStarted', warStart)
+
+                const index = this.warStartDate.indexOf(this.warStartDate[0])
+                if (index > -1) {
+                    this.warStartDate.splice(index, 1)
+                }
+
+                this.warStartDate.push(date)
             }
         }, 1000 * 60 * 8)
     }

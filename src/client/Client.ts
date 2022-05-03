@@ -91,4 +91,5 @@ interface Events {
     ['clanMemberRemove']: [oldMember: ClanMember],
     ['playerNameUpdate']: [oldName: PlayerName, newName: PlayerName],
     ['playerLeagueUpdate']: [newLeague: PlayerLeague]
+    ['clanWarStarted']: [war: ClanWar]
 }

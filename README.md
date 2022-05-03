@@ -10,6 +10,9 @@ v1.0.0
 
 v1.1.0
 + Added client events
+
+v1.1.1
++ Added clanWarStart event
 ```
 
 # Setup
@@ -103,6 +106,7 @@ client.events.init()
 - name: **clanMemberRemove**, listener: **oldMember**
 - name: **playerNameUpdate**, listeners: **oldName, newName**
 - name: **playerLeagueUpdate**, listener: **newLeague**
+- name: **clanWarStart**, listener: **war**
 
 # Disclaimer
 > This content is not affiliated with, endorsed, sponsored, or specifically approved by Supercell and Supercell is not responsible for it. For more information see [Supercell's Fan Content Policy](https://supercell.com/en/fan-content-policy/).
